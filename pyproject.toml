@@ -1,0 +1,46 @@
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "sales-analysis-pipeline"
+version = "0.1.0"
+description = "Retail sales ETL, data warehouse, and analytics dashboard"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pandas>=2.2",
+    "openpyxl>=3.1",
+    "matplotlib>=3.9",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
+    "python-dotenv>=1.0",
+    "streamlit>=1.40",
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.9",
+]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib", "-m", "not integration"]
+
+markers = [
+    "integration: tests that require a running PostgreSQL database",
+]
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
